@@ -26,29 +26,20 @@ typedef struct Vector {
     float Z;
 } Vector;
 
-@interface lvlzuobiao () {
-@public
-    CGFloat _scale;
-    CGFloat _theWidth;
-    CGFloat _theHeight;
-}
+@interface lvllzuobiao ()
 @property (nonatomic, assign) CGFloat scale;
 @property (nonatomic, assign) CGFloat theWidth;
 @property (nonatomic, assign) CGFloat theHeight;
 @end
 
-@implementation lvlzuobiao
-
-@synthesize scale = _scale;
-@synthesize theWidth = _theWidth;
-@synthesize theHeight = _theHeight;
+@implementation lvllzuobiao
 
 + (instancetype)data
 {
-    static lvlzuobiao *fact;
+    static lvllzuobiao *fact;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        fact = [[lvlzuobiao alloc] init];
+        fact = [[lvllzuobiao alloc] init];
     });
     return fact;
 }
@@ -61,9 +52,9 @@ typedef struct Vector {
         CGFloat width  = screen.bounds.size.width;
         CGFloat height = screen.bounds.size.height;
         
-        _scale = screen.scale;
-        _theWidth = width * screen.scale;
-        _theHeight = height * screen.scale;
+        self.scale = screen.scale;
+        self.theWidth = width * screen.scale;
+        self.theHeight = height * screen.scale;
     }
     return self;
 }
@@ -87,14 +78,17 @@ typedef struct Vector {
     float view = matrix[3] * vector.X + matrix[7] * vector.Y + matrix[11] * vector.Z + matrix[15];
     float x, y, z;
     
+    CGFloat w = self.theWidth;
+    CGFloat h = self.theHeight;
+    
     if (view < 0.01) {
         z = matrix[8] * vector.X + matrix[9] * vector.Y + matrix[10] * vector.Z + matrix[11];
-        x = _theWidth + (matrix[0] * vector.X + matrix[4] * vector.Y + matrix[8] * vector.Z + matrix[12]) / 2 * _theWidth;
-        y = _theHeight - (matrix[1] * vector.X + matrix[5] * vector.Y + matrix[9] * vector.Z + matrix[13]) / 2 * _theHeight;
+        x = w + (matrix[0] * vector.X + matrix[4] * vector.Y + matrix[8] * vector.Z + matrix[12]) / 2 * w;
+        y = h - (matrix[1] * vector.X + matrix[5] * vector.Y + matrix[9] * vector.Z + matrix[13]) / 2 * h;
     } else {
         z = matrix[3] * vector.X + matrix[7] * vector.Y + matrix[11] * vector.Z + matrix[15];
-        x = _theWidth + (matrix[0] * vector.X + matrix[4] * vector.Y + matrix[8] * vector.Z + matrix[12]) / z * _theWidth;
-        y = _theHeight - (matrix[1] * vector.X + matrix[5] * vector.Y + matrix[9] * vector.Z + matrix[13]) / z * _theHeight;
+        x = w + (matrix[0] * vector.X + matrix[4] * vector.Y + matrix[8] * vector.Z + matrix[12]) / z * w;
+        y = h - (matrix[1] * vector.X + matrix[5] * vector.Y + matrix[9] * vector.Z + matrix[13]) / z * h;
     }
     
     outVec.X = x / 2;
@@ -303,7 +297,7 @@ static Vector GetBoneWithRotation(const long mesh, int id)
         MyPlayerID = Read_Int(Character + 0x18);
     }
     
-    CGFloat curScale = _scale > 0 ? _scale : [UIScreen mainScreen].scale;
+    CGFloat curScale = self.scale > 0 ? self.scale : [UIScreen mainScreen].scale;
     
     for (int i = 0; i < count; i++) {
         long ziji = *(long*)(PLevel + 0xB0);
@@ -413,4 +407,11 @@ static Vector GetBoneWithRotation(const long mesh, int id)
     }
 }
 
+@end
+
+// Bridge/Linker compatibility for single 'l' usage in other files
+@interface lvlzuobiao : lvllzuobiao
+@end
+
+@implementation lvlzuobiao
 @end
