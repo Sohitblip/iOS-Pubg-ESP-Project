@@ -11,7 +11,6 @@
 #import "A1Config.h"
 #import "A2Config.h"
 #include <JRMemory/MemScan.h>
-#define AlConfig @""
 #define kTest   0
 #define g 0.86602540378444
 #define kWidth  [UIScreen mainScreen].bounds.size.width
