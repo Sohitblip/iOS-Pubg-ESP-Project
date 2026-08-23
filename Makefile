@@ -16,7 +16,7 @@ esp_CCFLAGS = -std=c++11 -fno-rtti -fno-exceptions -DNDEBUG
 esp_CFLAGS = -fobjc-arc -Wno-deprecated-declarations -Wno-unused-variable -Wno-unused-value
 esp_FILES = Lvhuizhi.mm lvzb.mm $(wildcard esp/*.cpp) $(wildcard esp/*.m) $(wildcard TEXT/*.m)
 
-include $(THEOS)/tweak.mk
+include $(THEOS)/makefiles/tweak.mk
 
 after-install::
 	install.exec "killall -9 ShadowTrackerExtra || :"
