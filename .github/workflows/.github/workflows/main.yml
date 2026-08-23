@@ -13,6 +13,7 @@ jobs:
 
     - name: Set up Theos Environment
       run: |
+        # Download and run the official Theos installer script
         bash -c "$(curl -fsSL https://githubusercontent.com)"
         echo "THEOS=/Users/runner/theos" >> $GITHUB_ENV
 
