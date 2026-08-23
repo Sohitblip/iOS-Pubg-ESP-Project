@@ -13,12 +13,12 @@ jobs:
 
     - name: Clone Theos Environment
       run: |
-        git clone --recursive https://github.com /Users/runner/theos
+        git clone --recursive 'https://github.com' /Users/runner/theos
         echo "THEOS=/Users/runner/theos" >> $GITHUB_ENV
 
     - name: Download iOS SDK
       run: |
-        curl -LO https://github.com
+        curl -LO 'https://github.com'
         mkdir -p /Users/runner/theos/sdks
         tar -xf iPhoneOS14.5.sdk.tar.xz -C /Users/runner/theos/sdks/
         rm iPhoneOS14.5.sdk.tar.xz
