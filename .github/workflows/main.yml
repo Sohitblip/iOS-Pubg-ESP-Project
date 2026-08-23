@@ -13,8 +13,16 @@ jobs:
 
     - name: Set up Theos Environment
       run: |
-        # Download and run the official Theos installer script
-        bash -c "$(curl -fsSL https://githubusercontent.com)"
+        # Force clean clone of theos repository
+        git clone --recursive https://github.com /Users/runner/theos
+        
+        # Download and extract patches/SDK needed for modern building
+        curl -LO https://github.com
+        mkdir -p /Users/runner/theos/sdks
+        tar -xf iPhoneOS14.5.sdk.tar.xz -C /Users/runner/theos/sdks/
+        rm iPhoneOS14.5.sdk.tar.xz
+        
+        # Set environment variable safely
         echo "THEOS=/Users/runner/theos" >> $GITHUB_ENV
 
     - name: Compile Tweak via Theos
