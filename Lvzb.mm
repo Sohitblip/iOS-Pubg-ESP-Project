@@ -26,13 +26,22 @@ typedef struct Vector {
     float Z;
 } Vector;
 
-@interface lvlzuobiao ()
+@interface lvlzuobiao () {
+@public
+    CGFloat _scale;
+    CGFloat _theWidth;
+    CGFloat _theHeight;
+}
 @property (nonatomic, assign) CGFloat scale;
 @property (nonatomic, assign) CGFloat theWidth;
 @property (nonatomic, assign) CGFloat theHeight;
 @end
 
 @implementation lvlzuobiao
+
+@synthesize scale = _scale;
+@synthesize theWidth = _theWidth;
+@synthesize theHeight = _theHeight;
 
 + (instancetype)data
 {
@@ -294,6 +303,8 @@ static Vector GetBoneWithRotation(const long mesh, int id)
         MyPlayerID = Read_Int(Character + 0x18);
     }
     
+    CGFloat curScale = _scale > 0 ? _scale : [UIScreen mainScreen].scale;
+    
     for (int i = 0; i < count; i++) {
         long ziji = *(long*)(PLevel + 0xB0);
         if(!ziji) { continue; }
@@ -352,7 +363,7 @@ static Vector GetBoneWithRotation(const long mesh, int id)
         float originX = fkzb1.X - width / 2;
         float originY = fkzb1.Y;
         
-        CGRect rect = CGRectMake(originX / _scale, originY / _scale, width / _scale, height / _scale);
+        CGRect rect = CGRectMake(originX / curScale, originY / curScale, width / curScale, height / curScale);
         long name = Read_long(Object + 0x868);
         if(!name) { continue; }
         UTF8 PlayerName[32] = "";
