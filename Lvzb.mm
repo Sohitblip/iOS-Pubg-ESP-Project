@@ -30,20 +30,20 @@ typedef struct Vector{
     float Z;
 }Vector;
 
-@interface lvllzuobiao()
+@interface lvlzuobiao()
 @property (nonatomic,  assign) CGFloat  scale;
 @property (nonatomic,  assign) CGFloat  theWidth;
 @property (nonatomic,  assign) CGFloat  theHeight;
 @end
 
-@implementation lvllzuobiao
+@implementation lvlzuobiao
 
 + (instancetype)data
 {
-    static lvllzuobiao *fact;
+    static lvlzuobiao *fact;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        fact = [[lvllzuobiao alloc] init];
+        fact = [[lvlzuobiao alloc] init];
     });
     return fact;
 }
