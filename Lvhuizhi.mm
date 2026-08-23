@@ -19,7 +19,10 @@
 #define timer(sec) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, sec * NSEC_PER_SEC), dispatch_get_main_queue(), ^
 
 
-
+@interface lvlzuobiao : NSObject
+@end
+@implementation lvlzuobiao
+@end
 @interface Lvllhuizhi()
 @property (nonatomic,  strong) UILabel *numberLabel;//人数
 @property (nonatomic,  strong) CAShapeLayer *drawLayer;//射线
