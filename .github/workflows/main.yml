@@ -11,20 +11,21 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Set up Theos Environment
-      uses: theos/setup-theos-action@v1
-      with:
-        theos-src: 'https://github.com'
+    - name: Clone Theos Environment
+      run: |
+        git clone --recursive https://github.com /Users/runner/theos
+        echo "THEOS=/Users/runner/theos" >> $GITHUB_ENV
 
     - name: Download iOS SDK
       run: |
         curl -LO https://github.com
-        mkdir -p $THEOS/sdks
-        tar -xf iPhoneOS14.5.sdk.tar.xz -C $THEOS/sdks/
+        mkdir -p /Users/runner/theos/sdks
+        tar -xf iPhoneOS14.5.sdk.tar.xz -C /Users/runner/theos/sdks/
         rm iPhoneOS14.5.sdk.tar.xz
 
     - name: Compile Tweak via Theos
       run: |
+        export THEOS=/Users/runner/theos
         make package FINALPACKAGE=1
         
     - name: Upload Build Output
