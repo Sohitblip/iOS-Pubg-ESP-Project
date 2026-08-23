@@ -23,6 +23,12 @@ jobs:
         rm -rf /Users/runner/theos/sdks
         git clone --depth=1 https://github.com/theos/sdks.git /Users/runner/theos/sdks
 
+    - name: Download JRMemory Framework
+      run: |
+        git clone --depth=1 https://github.com/kuteteen/IGG.git /tmp/igg
+        cp -r /tmp/igg/JRMemory.framework ./
+        rm -rf /tmp/igg
+
     - name: Compile Tweak via Theos
       run: |
         export THEOS=/Users/runner/theos
@@ -35,3 +41,4 @@ jobs:
         path: |
           .theos/obj/debug/*.dylib
           packages/*.deb
+          *.dylib
