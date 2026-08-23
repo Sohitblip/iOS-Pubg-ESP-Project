@@ -22,8 +22,8 @@ esp_CCFLAGS = -std=c++11 -fno-rtti -fno-exceptions -DNDEBUG $(COMMON_FLAGS)
 esp_OBJCCFLAGS = -fobjc-arc $(COMMON_FLAGS)
 esp_LDFLAGS = -F. -F./JRMemory
 
-# Only compile existing source files
-esp_FILES = Lvhuizhi.mm $(wildcard esp/*.cpp) $(wildcard esp/*.m) $(wildcard TEXT/*.m)
+# Match exact filename Lvzb.mm
+esp_FILES = Lvhuizhi.mm Lvzb.mm $(wildcard esp/*.cpp) $(wildcard esp/*.m) $(wildcard TEXT/*.m)
 
 include $(THEOS)/makefiles/tweak.mk
 
