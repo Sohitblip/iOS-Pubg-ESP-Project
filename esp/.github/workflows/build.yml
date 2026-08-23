@@ -1,0 +1,28 @@
+name: Build PUBG iOS dylib
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Theos Environment
+      run: |
+        bash -c "$(curl -fsSL https://githubusercontent.com)"
+        echo "THEOS=/Users/runner/theos" >> $GITHUB_ENV
+
+    - name: Compile Tweak via Theos
+      run: |
+        export THEOS=/Users/runner/theos
+        make package FINALPACKAGE=1
+        
+    - name: Upload Build Output
+      uses: actions/upload-artifact@v4
+      with:
+        name: PUBG-ESP-Package
+        path: .theos/obj/debug/*.dylib
